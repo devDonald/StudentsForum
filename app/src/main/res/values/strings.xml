@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">StudentsForum</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="states">
+        <item> Select State of Origin</item>
+        <item> FCT ABUJA</item>
+        <item> Abia State</item>
+        <item> Adamawa State</item>
+    </string-array>
+</resources>
