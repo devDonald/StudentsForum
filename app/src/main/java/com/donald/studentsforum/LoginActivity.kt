@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.donald.studentsforum.helpers.DatabaseHelper
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
@@ -53,25 +54,39 @@ class LoginActivity : AppCompatActivity() {
                 et_login_email.setError("invalid email")
             } else if(password.isEmpty()){
                 et_login_password.setError("password empty")
-            } else if (password.length<8){
+            } else if (password.length<2){
                 et_login_password.setError("password too short")
             } else {
 
+                //create an object of the database Helper class
 
-                val sharedPreference =  getSharedPreferences("LoginDetails",Context.MODE_PRIVATE)
+                val databaseHelper = DatabaseHelper(this)
 
-                val editor = sharedPreference.edit()
+                if (databaseHelper.checkUser(email, password)){
 
-                editor.putString("email",email)
-                editor.putString("password",password)
+                    val sharedPreference =  getSharedPreferences("LoginDetails",Context.MODE_PRIVATE)
 
-                editor.apply()
+                    val editor = sharedPreference.edit()
+
+                    editor.putString("email",email)
+                    editor.putString("password",password)
+
+                    editor.apply()
 
 
-                val dashboard = Intent(this,MainActivity:: class.java)
-                startActivity(dashboard)
-                finish()
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
+                    val dashboard = Intent(this,MainActivity:: class.java)
+                    dashboard.putExtra("email",email)
+                    startActivity(dashboard)
+                    finish()
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
+
+                } else{
+                    Toast.makeText(this, "Email/Password combination incorrect",
+                        Toast.LENGTH_LONG).show()
+                }
+
+
+
 
 
             }
