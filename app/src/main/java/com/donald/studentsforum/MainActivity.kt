@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         allUsersRecycler = findViewById<View>(R.id.all_users_recycler) as RecyclerView
         listView = ArrayList()
-        recyclerAdapter = UsersRecyclerAdapter(listView)
+        recyclerAdapter = UsersRecyclerAdapter(listView, this)
 
         //val mLayoutManager = LinearLayoutManager(this)
         allUsersRecycler.layoutManager = LinearLayoutManager(this)
