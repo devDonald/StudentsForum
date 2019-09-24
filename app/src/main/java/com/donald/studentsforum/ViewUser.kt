@@ -43,22 +43,20 @@ class ViewUser : AppCompatActivity() {
         val update_bt:Button = findViewById(R.id.view_user_update)
         val delete_bt:Button = findViewById(R.id.view_user_delete)
 
+        //TODO 1: Add Lines 50 to 62 in your ViewUser Activity
         update_bt.setOnClickListener(View.OnClickListener {
 
             //redirect the user to MainActivity
             val toUpdate = Intent(this,UpdateUser::class.java)
 
+            //sends id, name, email, address and password to the next page
             toUpdate.putExtra("id", id)
             toUpdate.putExtra("name",name)
             toUpdate.putExtra("email", email)
             toUpdate.putExtra("address", address)
             toUpdate.putExtra("password",password)
 
-            toUpdate.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            toUpdate.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            toUpdate.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(toUpdate)
-            finish()
 
         })
 
